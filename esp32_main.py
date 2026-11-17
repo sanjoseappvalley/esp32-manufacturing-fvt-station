@@ -11,7 +11,7 @@ led.value(0)
 adc = machine.ADC(machine.Pin(34))
 adc.atten(machine.ADC.ATTN_11DB) # Full 0V - 3.3V range
 
-DEVICE_ID = "ACME-HW,ESP32-DUT-REV1,SN2026111601,FW1.0.0"
+DEVICE_ID = "ACME-HW,ESP32-DUT-REV1,SN2026111601,FW1.1.0"
 
 def handle_command(cmd):
     cmd = cmd.strip().upper()
@@ -28,8 +28,9 @@ def handle_command(cmd):
     elif cmd == "LED?":
         return f"LED={led.value()}"
     if cmd == "READ:ADC?":
-        raw = adc.read() # 0 to 4095
-        volts = (raw / 4095.0) * 3.3
+        # User factory eFuse calibration in microvolts -> volts
+        uv = adc.read_uv()
+        volts = uv / 1_000_000.0
         return f"{volts:.4f}"
     elif cmd == "READ:TEMP?":
         # Internal MCU temperature sensor (Fahrenheit to Celsius)

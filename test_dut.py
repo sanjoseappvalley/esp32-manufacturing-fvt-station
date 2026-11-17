@@ -62,9 +62,9 @@ def dut():
 
 @pytest.fixture(scope="module")
 def serial_number(dut):
-    """Extract DUT serial number from *IDN? once per test run."""
+    """Extract DUT serial number (index 2) from *IDN? once per test run."""
     idn = dut.query("*IDN?")
-    return idn.split(",")[2]
+    return idn.split(",")
 
 
 def test_dut_identification(dut):
@@ -74,7 +74,7 @@ def test_dut_identification(dut):
     assert len(parts) == 4, f"Malformed IDN string: {idn}"
     assert parts[0] == "ACME-HW"
     assert parts[1] == "ESP32-DUT-REV1"
-    assert parts[3] == "FW1.0.0"
+    assert parts[3] == "FW1.1.0"
 
 
 def test_led_gpio_control(dut):
@@ -98,7 +98,7 @@ def test_adc_voltage_rail_bounds(dut, serial_number):
     """Verify GPIO 34 ADC reads ~1.65V divider (accounting for ~0.16V ESP32 ADC offset)."""
     voltage = float(dut.query("READ:ADC?"))
     # assert 0.0 <= voltage <= 3.3, f"ADC voltage out of bounds: {voltage} V"
-    log_measurement(serial_number, "ADC_GPI034_Divider", voltage, low=1.40, high=1.80, unit="V")
+    log_measurement(serial_number, "ADC_GPI034_Divider", voltage, low=1.55, high=1.75, unit="V")
 
 
 def test_invalid_command_error_handling(dut):
