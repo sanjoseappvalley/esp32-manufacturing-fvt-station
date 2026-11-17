@@ -64,7 +64,7 @@ def dut():
 def serial_number(dut):
     """Extract DUT serial number (index 2) from *IDN? once per test run."""
     idn = dut.query("*IDN?")
-    return idn.split(",")
+    return idn.split(",")[2]
 
 
 def test_dut_identification(dut):
