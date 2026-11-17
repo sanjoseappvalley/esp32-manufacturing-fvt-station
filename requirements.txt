@@ -1,0 +1,6 @@
+pyserial
+pyvisa
+pyvisa-sim
+pytest
+esptool
+mpremote
