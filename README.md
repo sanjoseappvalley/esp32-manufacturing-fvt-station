@@ -7,11 +7,17 @@ An automated Hardware-in-the-Loop (HIL) manufacturing test suite built with **Py
 - **Test Circuit:** Dual-breadboard fixture with a 10kΩ / 10kΩ resistor voltage divider (3.3V -> ~1.65V) connected to GPIO 34 (ADC)
 - **Verification Equipment:** AstroAI 20,000-count True RMS Digital Multimeter
 
+![ESP32 Breadboard Voltage Divider Setup](images/breadboard_setup.jpeg)(images/breadboard_setup2.jpeg)(multimeter_reading.jpeg)
+
 ## Features
 - **SCPI-Style Serial Protocol:** Implements `*IDN?`, `LED ON/OFF`, `READ:ADC?`, and `READ:TEMP?` over UART (115200 baud)
 - **Hardware Abstraction Layer (HAL):** Clean `DUTDriver` wrapper with safe `pytest` fixture teardown
 - **Production Traceability Logging:** Exports timestamped, serial-numbered test results and min/max tolerance limits to `fvt_production_log.csv`
 
 ## How to Run
-
-bash python3 -m venv venv source venv/bin/activate pip install -r requirements.txt pytest -v -s test_dut.py
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+pytest -v -s test_dut.py
+```
