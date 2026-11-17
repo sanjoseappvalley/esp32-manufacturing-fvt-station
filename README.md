@@ -7,7 +7,9 @@ An automated Hardware-in-the-Loop (HIL) manufacturing test suite built with **Py
 - **Test Circuit:** Dual-breadboard fixture with a 10kΩ / 10kΩ resistor voltage divider (3.3V -> ~1.65V) connected to GPIO 34 (ADC)
 - **Verification Equipment:** AstroAI 20,000-count True RMS Digital Multimeter
 
-![ESP32 Breadboard Voltage Divider Setup](images/breadboard_setup.jpeg)(images/breadboard_setup2.jpeg)(multimeter_reading.jpeg)
+![ESP32 Breadboard Voltage Divider Setup](images/breadboard_setup.jpeg)
+![ESP32 Breadboard Voltage Divider Setup](images/breadboard_setup2.jpeg)
+![ESP32 Breadboard Voltage Divider Setup](images/multimeter_reading.jpeg)
 
 ## Features
 - **SCPI-Style Serial Protocol:** Implements `*IDN?`, `LED ON/OFF`, `READ:ADC?`, and `READ:TEMP?` over UART (115200 baud)
