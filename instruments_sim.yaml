@@ -1,0 +1,51 @@
+spec: "1.1"
+devices:
+  psu:
+    eom:
+      USB INSTR:
+        q: "\n"
+        r: "\n"
+    error:
+      error_queue:
+        - q: "SYST:ERR?"
+          default: "0,\"No error\""
+      command_error: "-100,\"Command error\""
+      query_error: "-420,\"Query UNTERMINATED\""
+    dialogues:
+      - q: "*IDN?"
+        r: "Keysight Technologies,E36312A,MY59001234,2.1.0"
+      - q: "*RST"
+      - q: "*CLS"
+      - q: "VOLT 5.0"
+      - q: "CURR 0.5"
+      - q: "OUTP ON"
+      - q: "OUTP OFF"
+      - q: "MEAS:CURR?"
+        r: "+0.084500"
+
+  dmm:
+    eom:
+      USB INSTR:
+        q: "\n"
+        r: "\n"
+    error:
+      error_queue:
+        - q: "SYST:ERR?"
+          default: "0,\"No error\""
+      command_error: "-100,\"Command error\""
+      query_error: "-420,\"Query UNTERMINATED\""
+    dialogues:
+      - q: "*IDN?"
+        r: "Keysight Technologies,34461A,MY57200001,A.02.14"
+      - q: "*RST"
+      - q: "*CLS"
+      - q: "CONF:VOLT:DC 10,0.0001"
+      - q: "TRIG:SOUR IMM"
+      - q: "READ?"
+        r: "+3.301200"
+
+resources:
+  USB0::0x2A8D::0x1102::MY59001234::INSTR:
+    device: psu
+  USB0::0x2A8D::0x1301::MY57200001::INSTR:
+    device: dmm
